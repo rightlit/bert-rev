@@ -14,9 +14,9 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 #from preprocess import get_tokenizer, post_processing
 from supervised_nlputils import get_tokenizer, post_processing
 #from bilm import Batcher, BidirectionalLanguageModel, weight_layers
-from bert.modeling import BertModel, BertConfig
-from bert.optimization import create_optimizer
-from bert.tokenization import FullTokenizer, convert_to_unicode
+from modeling import BertModel, BertConfig
+from optimization import create_optimizer
+from tokenization import FullTokenizer, convert_to_unicode
 
 
 
