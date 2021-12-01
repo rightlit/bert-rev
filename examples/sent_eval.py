@@ -1,9 +1,9 @@
 import sys, requests, random
-sys.path.append('../models')
+sys.path.append('..')
 
 import tensorflow as tf
-from bert.modeling import BertModel, BertConfig
-from bert.tokenization import FullTokenizer, convert_to_unicode
+from modeling import BertModel, BertConfig
+from tokenization import FullTokenizer, convert_to_unicode
 #from bilm import Batcher, BidirectionalLanguageModel, weight_layers
 #from preprocess import get_tokenizer, post_processing
 #from supervised_nlputils import get_tokenizer, post_processing
