@@ -779,6 +779,30 @@ def convert_examples_to_features(examples, label_list, max_seq_length,
     features.append(feature)
   return features
 
+def get_faq_catetory():
+    catg_data = pd.read_csv('./dataset/faq_category_mcd.txt', header=0, delimiter=',', qoting=3, encoding='UTF-8')
+    
+    catg = {}
+    catg_seq = {}
+    catg_mcid = {}
+    catg_list = []
+    j = 0
+
+    for i, cd in enumerate(catg_data['CD']):
+        catid = cd[:]
+        catg[str(catid)] = catg_data['CD'][i]
+        catg_seq[catid] = i
+        catg_mcid[catid] = j
+        j += 1
+        #print("%s, %s" %(catid, catg_seq[catid]))
+
+    #print("\n")
+    for key in catg_mcid:
+        val = catg_mcid[key]
+        catg_list.append(str(val))
+        print("%s, %s" %(key, val))
+
+    return catg_list
 
 def main(_):
   tf.logging.set_verbosity(tf.logging.INFO)
@@ -814,7 +838,9 @@ def main(_):
 
   processor = processors[task_name]()
 
-  label_list = processor.get_labels()
+  # modified (2021.12.03)
+  #label_list = processor.get_labels()
+  label_list = get_faq_category()  
 
   tokenizer = tokenization.FullTokenizer(
       vocab_file=FLAGS.vocab_file, do_lower_case=FLAGS.do_lower_case)
