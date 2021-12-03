@@ -215,6 +215,7 @@ def create_training_instances(input_files, tokenizer, max_seq_length,
   vocab_words = list(tokenizer.vocab.keys())
   instances = []
   # modified (2021.12.03)
+  total_len = len(all_documents)
   #for _ in range(dupe_factor):
   for factor_index in range(dupe_factor):
     for document_index in range(len(all_documents)):
