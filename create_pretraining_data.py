@@ -170,6 +170,11 @@ def create_int_feature(values):
   feature = tf.train.Feature(int64_list=tf.train.Int64List(value=list(values)))
   return feature
 
+# added (2021.12.03)
+from datetime import datetime
+def get_timestamp():
+  time_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+  return time_str
 
 def create_float_feature(values):
   feature = tf.train.Feature(float_list=tf.train.FloatList(value=list(values)))
@@ -209,8 +214,15 @@ def create_training_instances(input_files, tokenizer, max_seq_length,
 
   vocab_words = list(tokenizer.vocab.keys())
   instances = []
-  for _ in range(dupe_factor):
+  # modified (2021.12.03)
+  #for _ in range(dupe_factor):
+  for factor_index in range(dupe_factor):
     for document_index in range(len(all_documents)):
+      # added (2021.12.03)
+      if(document_index % 1000 == 0):
+          per = float(document_index) / float(total_len) * 100
+          tf.logging.info("[%s] (%d) %.1f lines processed(%d / %d)", get_timestamp(), factor_index, per, document_index, total_len)
+      
       instances.extend(
           create_instances_from_document(
               all_documents, document_index, max_seq_length, short_seq_prob,
