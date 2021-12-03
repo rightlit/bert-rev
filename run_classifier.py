@@ -779,7 +779,7 @@ def convert_examples_to_features(examples, label_list, max_seq_length,
     features.append(feature)
   return features
 
-def get_faq_catetory():
+def get_faq_category():
     catg_data = pd.read_csv('./dataset/faq_category_mcd.txt', header=0, delimiter=',', qoting=3, encoding='UTF-8')
     
     catg = {}
